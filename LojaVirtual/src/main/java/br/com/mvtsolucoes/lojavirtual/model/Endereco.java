@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.com.mvtsolucoes.lojavirtual.enums.Tipo_Endereco;
+
 @Entity
 @Table(name = "endereco")
 @SequenceGenerator(name = "seq_endereco", sequenceName = "seq_endereco", allocationSize = 1, initialValue = 1)
@@ -29,7 +31,10 @@ public class Endereco implements Serializable {
 
 	@Column(nullable = true)
 	private String logradouro;
+	
+	@Column(nullable = true)
 	private String cep;
+	
 	private String numero;
 	private String bairro;
 	private String complemento;

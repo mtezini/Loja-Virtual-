@@ -14,7 +14,6 @@ public class Pessoa_Juridica extends Pessoa {
 	private String cnpj;
 	
 	private String inscEstadual;
-	
 	private String inscMunicipal;
 	private String nomeFantasia;
 	private String razaoSocial;
