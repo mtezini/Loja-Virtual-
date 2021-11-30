@@ -13,12 +13,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-
+/*
 
 @Entity
 @Table(name = "usuario_acesso")
 @SequenceGenerator(name = "seq_usuario_acesso", sequenceName = "seq_usuario_acesso", allocationSize = 1, initialValue = 1)
-public class Usuario_Acesso implements Serializable {
+public class Usuario_Acesso_teste implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -74,7 +74,7 @@ public class Usuario_Acesso implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario_Acesso other = (Usuario_Acesso) obj;
+		Usuario_Acesso_teste other = (Usuario_Acesso_teste) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -92,3 +92,4 @@ public class Usuario_Acesso implements Serializable {
 	
 	
 }
+*/

@@ -1,25 +1,33 @@
 package br.com.mvtsolucoes.lojavirtual.model;
 
-import java.io.Serializable;
-import java.time.LocalDate;
 
+import java.time.LocalDate;
+import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
-
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Entity
 @Table(name = "usuario")
 @SequenceGenerator(name = "seq_usuario", sequenceName = "seq_usuario", allocationSize = 1, initialValue = 1)
-public class Usuario implements Serializable{
+public class Usuario implements UserDetails{
 
 	private static final long serialVersionUID = 1L;
 
@@ -34,6 +42,17 @@ public class Usuario implements Serializable{
 	@Column(name = "data_atual_senha")
 	@Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
 	private LocalDate dataatualsenha;
+	
+	
+	@OneToMany(fetch =  FetchType.LAZY)
+	@JoinTable (name= "usuario_acesso", uniqueConstraints =  @UniqueConstraint (columnNames = {"usuario_id", "acesso_id"} ,
+	name = "unique_acesso_user" ), joinColumns = @JoinColumn (name = "usuario_id", referencedColumnName = "id", 
+	table = "usuario", unique = false, foreignKey = @ForeignKey (name = "usuario_fk", value = ConstraintMode.CONSTRAINT) ),
+	inverseJoinColumns = @JoinColumn(name = "acesso_id", unique = false, referencedColumnName = "id", 
+	table = "acesso", foreignKey = @ForeignKey (name = "acesso_fk")))
+	private List<Acesso> acessos;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -57,6 +76,13 @@ public class Usuario implements Serializable{
 	}
 	public void setDataatualsenha(LocalDate dataatualsenha) {
 		this.dataatualsenha = dataatualsenha;
+	}
+	
+	public List<Acesso> getAcessos() {
+		return acessos;
+	}
+	public void setAcessos(List<Acesso> acessos) {
+		this.acessos = acessos;
 	}
 	@Override
 	public int hashCode() {
@@ -83,6 +109,44 @@ public class Usuario implements Serializable{
 	}
 	
 	
+	/*Autoridades = São os acessos, ou seja ROLE_ADMIN, ROLE_USUARIO */
+	
+	
+	
+	@Override
+	public java.util.Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		return this.acessos;
+	}
+	@Override
+	public String getPassword() {
+
+		return this.senha;
+	}
+	@Override
+	public String getUsername() {
+
+		return this.login;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 	
 }
 

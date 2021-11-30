@@ -6,6 +6,7 @@ public enum Status_Contas_Receber {
 	Pago("Pago"),
 	Cancelado ("Cancelado");
 	
+	
 	private String Status_Contas_Receber;
 		
 
