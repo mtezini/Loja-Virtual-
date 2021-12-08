@@ -4,6 +4,8 @@ public enum Status_Contas_Receber {
 	
 	Pendente ("Pendente"),
 	Pago("Pago"),
+	Aberto("Aberto"),
+	Cobranca("Cobrança"),
 	Cancelado ("Cancelado");
 	
 	

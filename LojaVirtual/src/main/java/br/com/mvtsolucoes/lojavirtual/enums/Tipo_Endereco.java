@@ -4,7 +4,8 @@ public enum Tipo_Endereco   {
 	
 	ENDERECO_ENTREGA ("Endereço de Entrega"),
 	ENDERECO_RESIDENCIAL ("Endereço_Residencial"),
-	ENDERECO_COMERCIAL ("Endereço_Comercial");
+	ENDERECO_COMERCIAL ("Endereço_Comercial"),
+	ENDERECO_COBRANÇA("Endereco_Cobrança");
 	
 
 	private String Tipo_Entrega;
